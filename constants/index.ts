@@ -12,8 +12,8 @@ export const headerLinks = [
     route: "/news",
   },
   {
-    label: "My Profile",
-    route: "/profile",
+    label: "My Edir",
+    route: "/my-edirs",
   },
 ];
 
