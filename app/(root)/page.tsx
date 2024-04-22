@@ -18,7 +18,7 @@ const Home = () => {
               </p>
         
               <Button size="lg" asChild className="button w-full sm:w-fit">
-                <Link href='#events'>Explore Edirs</Link>
+                <Link href='#edirs'>Explore Edirs</Link>
               </Button>
             </div>
         
