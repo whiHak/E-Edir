@@ -54,39 +54,39 @@ export async function POST(req: Request) {
   // Get the ID and type
   const eventType = evt.type;
 
-  // if (eventType === "user.created") {
-  //   const {
-  //     id,
-  //     first_name,
-  //     last_name,
-  //     email_addresses,
-  //     phone_numbers,
-  //     username,
-  //     image_url,
-  //   } = evt.data;
+  if (eventType === "user.created") {
+    const {
+      id,
+      first_name,
+      last_name,
+      email_addresses,
+      phone_numbers,
+      username,
+      image_url,
+    } = evt.data;
 
-  //   const user = {
-  //     clerkId: id,
-  //     email: email_addresses[0].email_address,
-  //     phoneNumber: phone_numbers[0],
-  //     username: username!,
-  //     firstName: first_name,
-  //     lastName: last_name,
-  //     photo: image_url,
-  //   };
+    const user = {
+      clerkId: id,
+      email: email_addresses[0].email_address,
+      phoneNumber: phone_numbers[0],
+      username: username!,
+      firstName: first_name,
+      lastName: last_name,
+      photo: image_url,
+    };
 
-  //   const newUser = await createuser(user);
+    const newUser = await createuser(user);
 
-  //   if (newUser) {
-  //     await clerkClient.users.updateUserMetadata(id, {
-  //       publicMetadata: {
-  //         userId: newUser._id,
-  //       },
-  //     });
-  //   }
+    if (newUser) {
+      await clerkClient.users.updateUserMetadata(id, {
+        publicMetadata: {
+          userId: newUser._id,
+        },
+      });
+    }
 
-  //   return NextResponse.json({ message: "OK", user: newUser }); 
-  // }
+    // return NextResponse.json({ message: "OK", user: newUser }); 
+    return new Response("", { status: 200 });
+  }
 
-  return new Response("", { status: 200 });
 }
