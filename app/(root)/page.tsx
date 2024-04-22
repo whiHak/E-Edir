@@ -1,9 +1,11 @@
 import { Button } from '@/components/ui/button'
+import { createuser } from '@/lib/actions/user.actions'
+import { auth, clerkClient } from '@clerk/nextjs'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
-const Home = () => {
+const Home = async() => {
   return (
       <>
         <section className="bg-primary-50  bg-dotted-pattern bg-contain py-5 md:py-10 ">
