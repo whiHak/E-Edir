@@ -18,24 +18,60 @@ import Image from "next/image";
 import { Textarea } from "../ui/textarea";
 import { useState } from "react";
 import { FileUploader } from "./FileUploader";
+import { IEdir } from "@/lib/database/models/edir.model";
+import { edirDefaultValues } from "@/constants";
+import { useUploadThing } from "@/lib/uploadthing";
+import { useRouter } from "next/navigation";
+import { createEdir } from "@/lib/actions/edir.action";
 
 type EdirFormProps = {
   userId: string;
-  type: string;
+  type: "Create" | "Update";
+  edir?: IEdir;
+  edirId?: string;
 };
-const EdirForm = ({ userId, type }: EdirFormProps) => {
+const EdirForm = ({ userId, type, edir, edirId }: EdirFormProps) => {
   const [files, setFiles] = useState<File[]>([]);
+  const initialValues = edir && type === "Update" ? edir : edirDefaultValues;
+
+  const router = useRouter();
+  const {startUpload} = useUploadThing("imageUploader");
+
 
   const form = useForm<z.infer<typeof edirFormSchema>>({
     resolver: zodResolver(edirFormSchema),
-    defaultValues: {
-      title: "",
-    },
+    defaultValues: initialValues
   });
-  function onSubmit(values: z.infer<typeof edirFormSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof edirFormSchema>) {
+    const edirData = values;
+
+    let uploadedImageUrl = edirData.imageUrl
+
+    if(files.length > 0){
+      const uploadedImages = await startUpload(files)
+
+      if(!uploadedImages){
+        return;
+      }     
+
+      uploadedImageUrl = uploadedImages[0].url;
+    }
+
+    if(type === "Create"){
+      try {
+        const newEdir = await createEdir({
+          edir: {...values, imageUrl: uploadedImageUrl},
+          userId
+        })
+
+        if(newEdir){
+          form.reset();
+          router.push(`/edirs/${newEdir._id}`)
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    }
   }
   return (
     <Form {...form}>

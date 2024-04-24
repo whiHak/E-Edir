@@ -12,7 +12,7 @@ const CreateEdir = () => {
         <h3 className="wrapper h3-bold text-center sm:text-left">Create Edir</h3>
       </section>
       <div className="wrapper my-8">
-        <EdirForm userId={userId} type="Create"  />
+        <EdirForm userId={userId} type="Create"/>
       </div>
     </>
   )

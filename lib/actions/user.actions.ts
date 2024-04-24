@@ -1,3 +1,4 @@
+"use server";
 import { PhoneNumberJSON } from "@clerk/nextjs/server";
 import { connectToDatabase } from "../database"
 import User from "../database/models/user.model";
