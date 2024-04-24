@@ -80,6 +80,9 @@ body {
   /* font-family: 'Poppins'; */
   /* font-family: var(--font-poppins) */
 }
+::-webkit-scrollbar{
+  display: none;
+}
 
 .filter-grey {
   filter: brightness(0) saturate(100%) invert(47%) sepia(0%) saturate(217%)
