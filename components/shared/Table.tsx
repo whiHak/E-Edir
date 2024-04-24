@@ -11,43 +11,50 @@ import {
 
 const invoices = [
   {
-    invoice: "INV001",
+    id: "01",
+    UserName:"Feysel",
     paymentStatus: "Paid",
     totalAmount: "$250.00",
     paymentMethod: "Credit Card",
   },
   {
-    invoice: "INV002",
+    id: "02",
+    UserName:"Feysel",
     paymentStatus: "Pending",
     totalAmount: "$150.00",
     paymentMethod: "PayPal",
   },
   {
-    invoice: "INV003",
+    id: "03",
+    UserName:"Feysel",
     paymentStatus: "Unpaid",
     totalAmount: "$350.00",
     paymentMethod: "Bank Transfer",
   },
   {
-    invoice: "INV004",
+    id: "04",
+    UserName:"Feysel",
     paymentStatus: "Paid",
     totalAmount: "$450.00",
     paymentMethod: "Credit Card",
   },
   {
-    invoice: "INV005",
+    id: "05",
+    UserName:"Feysel",
     paymentStatus: "Paid",
     totalAmount: "$550.00",
     paymentMethod: "PayPal",
   },
   {
-    invoice: "INV006",
+    id: "06",
+    UserName:"Feysel",
     paymentStatus: "Pending",
     totalAmount: "$200.00",
     paymentMethod: "Bank Transfer",
   },
   {
-    invoice: "INV007",
+    id: "07",
+    UserName:"Feysel",
     paymentStatus: "Unpaid",
     totalAmount: "$300.00",
     paymentMethod: "Credit Card",
@@ -56,32 +63,34 @@ const invoices = [
 
 export function TableDemo() {
   return (
-    <Table className=" shadow-md rounded-lg overflow-auto">
+    <Table className="shadow-md rounded-lg overflow-auto">
       <TableCaption>A list of your monthly payements.</TableCaption>
       <TableHeader>
         <TableRow>
-          <TableHead className="w-[100px]">Invoice</TableHead>
+          <TableHead></TableHead>
+          <TableHead>Username</TableHead>
           <TableHead>Status</TableHead>
           <TableHead>Method</TableHead>
-          <TableHead className="text-right">Amount</TableHead>
+          <TableHead>Amount</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
         {invoices.map((invoice) => (
-          <TableRow key={invoice.invoice}>
-            <TableCell className="font-medium">{invoice.invoice}</TableCell>
+          <TableRow key={invoice.id}>
+            <TableCell className="font-medium">{invoice.id}</TableCell>
+            <TableCell>{invoice.UserName}</TableCell>
             <TableCell>{invoice.paymentStatus}</TableCell>
             <TableCell>{invoice.paymentMethod}</TableCell>
-            <TableCell className="text-right">{invoice.totalAmount}</TableCell>
+            <TableCell>{invoice.totalAmount}</TableCell>
           </TableRow>
         ))}
       </TableBody>
-      <TableFooter>
+      {/* <TableFooter>
         <TableRow>
-          <TableCell colSpan={3}>Total</TableCell>
+          <TableCell colSpan={4}>Total</TableCell>
           <TableCell className="text-right">$2,500.00</TableCell>
         </TableRow>
-      </TableFooter>
+      </TableFooter> */}
     </Table>
   );
 }

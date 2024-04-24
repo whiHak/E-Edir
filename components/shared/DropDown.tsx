@@ -1,35 +1,46 @@
-"use client"
+"use client";
 
-import * as React from "react"
-
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuLabel,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from "@/components/ui/dropdown-menu";
+import Image from "next/image";
+import { useState } from "react";
 
 export function DropdownMenuRadioGroupDemo() {
-  const [position, setPosition] = React.useState("bottom")
+  const [selectedMonth, setSelectedMonth] = useState("Select Month");
+
+  const handleMonthChange = (value: string) => {
+    setSelectedMonth(value);
+  };
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline">Payement Detail</Button>
+        <Button variant="outline" className="flex-center gap-5 " size="lg">
+          {selectedMonth}
+          <Image
+            src="/assets/icons/calendar.svg"
+            alt="arrow icon"
+            width={20}
+            height={20}
+          />
+        </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56">
-        <DropdownMenuLabel>Monthly</DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        <DropdownMenuRadioGroup value={position} onValueChange={setPosition}>
-          <DropdownMenuRadioItem value="top">SEP</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="bottom">OCT</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="right">DEC</DropdownMenuRadioItem>
+      <DropdownMenuContent>
+        <DropdownMenuRadioGroup
+          value={selectedMonth}
+          onValueChange={handleMonthChange}
+        >
+          <DropdownMenuRadioItem value="SEP">SEP</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="OCT">OCT</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="DEC">DEC</DropdownMenuRadioItem>
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>
-  )
+  );
 }
