@@ -1,29 +1,13 @@
 "use server";
+import { CreateEdirParams } from "@/types";
 import { connectToDatabase } from "../database";
 import Edir, { IEdir } from "../database/models/edir.model";
 import User from "../database/models/user.model";
-
-type CreateEdirParams = {
-  userId: string;
-  edir: {
-    title: string;
-    description: string;
-    location: string;
-    imageUrl: string;
-    price: string;
-  };
-};
+import { addMemberToEdir } from "./user.actions";
 
 const populateEdir = (query: any) => {
   return query.populate({
     path: "leader",
-    model: User,
-    select: "_id firstName lastName",
-  });
-};
-const populateEdir2 = (query: any) => {
-  return query.populate({
-    path: "auditor",
     model: User,
     select: "_id firstName lastName",
   });
@@ -33,15 +17,19 @@ export async function createEdir({ edir, userId }: CreateEdirParams) {
   try {
     await connectToDatabase();
 
-    const leader = await User.findById(userId);
+    const leader = await User.findById(userId.toString());
     if (!leader) throw new Error("Leader Not Found");
 
     const newEdir = await Edir.create({
       ...edir,
       leader: userId,
-      auditor: "",
     });
 
+    addMemberToEdir({
+      username: leader.username,
+      edir: newEdir,
+      path: `/edirs/${newEdir._id.toString()}`,
+    });
     return JSON.parse(JSON.stringify(newEdir));
   } catch (error) {
     console.log(error);
@@ -73,31 +61,26 @@ export async function setAuditor({
     await connectToDatabase();
 
     const auditor = await User.findOne({ username: username });
-    if (!auditor) throw new Error("Auditor not found");
-
-    if (!edir.auditor) {
-      const updatedEdir = await Edir.findByIdAndUpdate(
-        edir._id,
-        { ...edir, auditor: auditor._id },
-        { new: true, runValidators: true, strict: false }
-      )
-
-      if (!updatedEdir) throw new Error("Edir not found");
-
-      return JSON.parse(JSON.stringify(updatedEdir));
-    } else {
-      const updatedEdir = await Edir.findByIdAndUpdate(
-        edir._id,
-        { auditor: auditor._id },
-        { new: true, runValidators: true, strict: false }
-      )
-
-      if (!updatedEdir) throw new Error("Edir not found");
-
-      return JSON.parse(JSON.stringify(updatedEdir));
+    if (!auditor) {
+      return "Auditor not found";
     }
+
+    const updateData = edir.auditor
+      ? { auditor: auditor._id }
+      : { ...edir, auditor: auditor._id };
+    const updatedEdir = await Edir.findByIdAndUpdate(edir._id, updateData, {
+      new: true,
+      runValidators: true,
+      strict: false,
+    });
+
+    if (!updatedEdir) {
+      return "Edir not found";
+    }
+
+    return "Auditor updated successfully";
   } catch (error) {
     console.error("Error updating Edir:", error);
-    throw error;
+    return "Failed to update auditor due to an internal error";
   }
 }

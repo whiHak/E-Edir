@@ -4,6 +4,8 @@ import CheckoutButton from "@/components/shared/CheckoutButton";
 import { getEdirById } from "@/lib/actions/edir.action";
 import Image from "next/image";
 import React from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 type SearchParamProps = {
   params: { id: string };
@@ -99,6 +101,8 @@ const EdirDetails = async ({
       </section>
 
       <section className="wrapper my-8 flex flex-col gap-8 md:gap-12"></section>
+
+      <ToastContainer />
     </>
   );
 };

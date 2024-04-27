@@ -23,6 +23,8 @@ import { edirDefaultValues } from "@/constants";
 import { useUploadThing } from "@/lib/uploadthing";
 import { useRouter } from "next/navigation";
 import { createEdir } from "@/lib/actions/edir.action";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 type EdirFormProps = {
   userId: string;
@@ -35,41 +37,41 @@ const EdirForm = ({ userId, type, edir, edirId }: EdirFormProps) => {
   const initialValues = edir && type === "Update" ? edir : edirDefaultValues;
 
   const router = useRouter();
-  const {startUpload} = useUploadThing("imageUploader");
-
+  const { startUpload } = useUploadThing("imageUploader");
 
   const form = useForm<z.infer<typeof edirFormSchema>>({
     resolver: zodResolver(edirFormSchema),
-    defaultValues: initialValues
+    defaultValues: initialValues,
   });
   async function onSubmit(values: z.infer<typeof edirFormSchema>) {
     const edirData = values;
 
-    let uploadedImageUrl = edirData.imageUrl
+    let uploadedImageUrl = edirData.imageUrl;
 
-    if(files.length > 0){
-      const uploadedImages = await startUpload(files)
+    if (files.length > 0) {
+      const uploadedImages = await startUpload(files);
 
-      if(!uploadedImages){
+      if (!uploadedImages) {
         return;
-      }     
+      }
 
       uploadedImageUrl = uploadedImages[0].url;
     }
 
-    if(type === "Create"){
+    if (type === "Create") {
       try {
         const newEdir = await createEdir({
-          edir: {...values, imageUrl: uploadedImageUrl},
-          userId
-        })
+          edir: { ...values, imageUrl: uploadedImageUrl },
+          userId,
+        });
 
-        if(newEdir){
+        if (newEdir) {
           form.reset();
-          router.push(`/edirs/${newEdir._id}`)
+          router.push(`/edirs/${newEdir._id}`);
+          toast.success("Edir Created Successfull")
         }
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
     }
   }
@@ -226,6 +228,7 @@ const EdirForm = ({ userId, type, edir, edirId }: EdirFormProps) => {
           {form.formState.isSubmitting ? "Submitting..." : `${type} Edir`}
         </Button>
       </form>
+      <ToastContainer />
     </Form>
   );
 };

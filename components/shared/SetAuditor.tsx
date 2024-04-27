@@ -14,16 +14,22 @@ import { Input } from "../ui/input";
 import { startTransition, useState } from "react";
 import { setAuditor } from "@/lib/actions/edir.action";
 import { IEdir } from "@/lib/database/models/edir.model";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-const SetAuditor = ({edir}: {edir:IEdir}) => {
-    const [username, setUsername] = useState('')
+const SetAuditor = ({ edir }: { edir: IEdir }) => {
+  const [username, setUsername] = useState("");
 
-    const handleSetAuditor = () => {
-        setAuditor({
-            username: username.trim(),
-            edir
-        })
-    }
+  const handleSetAuditor = async () => {
+    const setAuditorResponse = await setAuditor({
+      username: username.trim(),
+      edir,
+    });
+
+    setAuditorResponse === "Auditor updated successfully"
+      ? toast.success(setAuditorResponse)
+      : toast.error(setAuditorResponse);
+  };
   return (
     <AlertDialog>
       <AlertDialogTrigger>
@@ -39,15 +45,18 @@ const SetAuditor = ({edir}: {edir:IEdir}) => {
               type="text"
               placeholder="Username..."
               className="input-field mt-3"
-              onChange={(e)=>setUsername(e.target.value)}
+              onChange={(e) => setUsername(e.target.value)}
             />
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction onClick={()=>startTransition(handleSetAuditor)}>Set</AlertDialogAction>
+          <AlertDialogAction onClick={() => startTransition(handleSetAuditor)}>
+            Set
+          </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
+      <ToastContainer />
     </AlertDialog>
   );
 };

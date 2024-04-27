@@ -7,7 +7,7 @@ import { TableDemo } from "@/components/shared/Table";
 const Page = () => {
   return (
     <div className="flex flex-col">
-      <div className="flex gap-11 mt-8 space-x-4 mx-auto">  
+      <div className="flex flex-col gap-11 mt-8 space-x-4 mx-auto md:flex-row">  
         <div className="text-center">
             <span className="text-sm font-medium">Net Worth</span>
             <span className="block text-4xl mt-1 font-extrabold">$ 5122.50</span>
