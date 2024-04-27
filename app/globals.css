@@ -66,16 +66,22 @@
   }
 }
 
+/* @import url("https://fonts.googleapis.com/css2?family=Gochi+Hand&family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap"); */
+
 * {
   list-style: none;
   padding: 0;
   margin: 0;
   scroll-behavior: smooth;
-  /* font-family: 'Poppins'; */
+  /* font-family: "Poppins", sans-serif; */
 }
 
 body {
-  font-family: var(--font-poppins)
+  /* font-family: 'Poppins'; */
+  /* font-family: var(--font-poppins) */
+}
+::-webkit-scrollbar{
+  display: none;
 }
 
 .filter-grey {

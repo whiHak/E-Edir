@@ -8,7 +8,7 @@ const UserSchema = new Schema({
     lastName: {type: String, required:true},
     phoneNumber:{type:String, requied:true},
     photo: {type:String, required:true},
-    edirId: {type:String},
+    edirId: {type: Schema.Types.ObjectId, ref:"Edir"},
     role:{type:String}
 })
 

@@ -17,15 +17,11 @@ export const headerLinks = [
   },
 ];
 
-export const eventDefaultValues = {
+export const edirDefaultValues = {
   title: "",
-  description: "",
   location: "",
-  imageUrl: "",
-  startDateTime: new Date(),
-  endDateTime: new Date(),
-  categoryId: "",
+  description: "",
   price: "",
-  isFree: false,
-  url: "",
+  imageUrl: "",
+  paymentDeadline: ""
 };
