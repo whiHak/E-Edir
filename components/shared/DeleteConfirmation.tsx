@@ -15,8 +15,11 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { deleteEdir } from "@/lib/actions/edir.actions";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-export const DeleteConfirmation = ({ edirId }: { edirId: string }) => {
+export const DeleteConfirmation = ({ edirId, userId }: { edirId: string, userId:string }) => {
   const pathname = usePathname();
   let [isPending, startTransition] = useTransition();
 
@@ -43,16 +46,18 @@ export const DeleteConfirmation = ({ edirId }: { edirId: string }) => {
           <AlertDialogCancel>Cancel</AlertDialogCancel>
 
           <AlertDialogAction
-            // onClick={() =>
-            //   startTransition(async () => {
-            //     await deleteEdir({ eventId, path: pathname });
-            //   })
-            // }
+            onClick={() =>
+              startTransition(async () => {
+                const isDeleted = await deleteEdir({ edirId, path: pathname, userId });
+                if (isDeleted) toast.success("Edir Deleted Successfull");
+              })
+            }
           >
             {isPending ? "Deleting..." : "Delete"}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
+      <ToastContainer />
     </AlertDialog>
   );
 };

@@ -2,7 +2,7 @@ import { model, models, Schema } from "mongoose";
 
 export interface IOrder extends Document {
   createdAt: Date;
-  chapaeId: string;
+  chapaId: string;
   totalAmount: string;
   edir: {
     _id: string;

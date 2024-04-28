@@ -15,7 +15,9 @@ const Card = async () => {
 
   const isLeader = userId === edir?.leader?._id?.toString();
   const isAuditor = userId === edir?.auditor?._id?.toString();
-  return currentUser?.edirId ? (
+
+  console.log(currentUser?.edirId);
+  return currentUser.edirId ? (
     <div className="group relative flex min-h-[280px] w-full max-w-[300px] flex-col overflow-hidden rounded-xl bg-white shadow-md transition-all hover:shadow-lg md:min-h-[338px] m-5">
       <div
         style={{ backgroundImage: `url(${edir?.imageUrl})` }}
@@ -32,7 +34,7 @@ const Card = async () => {
               />
             </Link>
             <Link href="">
-              <DeleteConfirmation edirId={edir?._id} />
+              <DeleteConfirmation edirId={edir?._id} userId={userId} />
             </Link>
           </div>
         )}
@@ -44,9 +46,16 @@ const Card = async () => {
             {`$${edir?.price}`}
           </span>
 
-          <p className="p-semibold-14 w-max rounded-full bg-grey-500/10 px-4 py-1 text-grey-500 line-clamp-1">
-            {edir?.location}
-          </p>
+          <div className="flex w-max rounded-full bg-grey-500/10 px-1 py-1 line-clamp-1">
+            <Image
+              src="/assets/icons/location.svg"
+              alt="location"
+              width={20}
+              height={20}
+              className=""
+            />
+            <p className="p-semibold-14 text-grey-500 px-1">{edir?.location}</p>
+          </div>
         </div>
 
         <Link href={`/edirs/${edir?._id}`}>

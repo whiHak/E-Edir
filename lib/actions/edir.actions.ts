@@ -1,9 +1,10 @@
 "use server";
-import { CreateEdirParams } from "@/types";
+import { CreateEdirParams, UpdateEdirParams } from "@/types";
 import { connectToDatabase } from "../database";
 import Edir, { IEdir } from "../database/models/edir.model";
 import User from "../database/models/user.model";
 import { addMemberToEdir } from "./user.actions";
+import { revalidatePath } from "next/cache";
 
 const populateEdir = (query: any) => {
   return query.populate({
@@ -24,7 +25,6 @@ export async function createEdir({ edir, userId }: CreateEdirParams) {
       ...edir,
       leader: userId,
     });
-
     addMemberToEdir({
       username: leader.username,
       edir: newEdir,
@@ -82,5 +82,64 @@ export async function setAuditor({
   } catch (error) {
     console.error("Error updating Edir:", error);
     return "Failed to update auditor due to an internal error";
+  }
+}
+
+export async function updateEdir({ userId, edir, path }: UpdateEdirParams) {
+  try {
+    await connectToDatabase();
+
+    const edirToUpdate = await Edir.findById(edir._id);
+    if (!edirToUpdate || edirToUpdate.leader.toHexString() !== userId) {
+      return "Unauthorized or event not found";
+    }
+
+    const updatedEdir = await Edir.findByIdAndUpdate(
+      edir._id,
+      { ...edir },
+      { new: true }
+    );
+    revalidatePath(path);
+
+    return JSON.parse(JSON.stringify(updatedEdir));
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function deleteEdir({
+  edirId,
+  path,
+  userId,
+}: {
+  edirId: string;
+  path: string;
+  userId: string;
+}) {
+  try {
+    await connectToDatabase();
+
+    const deletedEdir = await Edir.findByIdAndDelete(edirId);
+    if (!deletedEdir) {
+      console.log("Edir not found or already deleted.");
+      return false; // Returning false if the Edir is not found or could not be deleted
+    }
+
+    const user = await User.findByIdAndUpdate(
+      userId,
+      { edirId: null },
+      { new: true, runValidators: true, strict: false }
+    );
+    if (!user) {
+      console.log("User not found or update failed.");
+      return false; // Handling case where user update fails
+    }
+
+    console.log(user);
+    revalidatePath(path);
+    return true;
+  } catch (error) {
+    console.log("Error in deleteEdir:", error);
+    return false; // Ensuring a consistent return on error
   }
 }

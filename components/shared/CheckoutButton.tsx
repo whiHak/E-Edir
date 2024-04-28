@@ -2,7 +2,7 @@ import React from "react";
 import { Button } from "../ui/button";
 import { IEdir } from "@/lib/database/models/edir.model";
 import { auth } from "@clerk/nextjs";
-import { checkoutOrder } from "@/lib/actions/order.actions";
+import { checkoutOrder, createOrder } from "@/lib/actions/order.actions";
 import { getUserById } from "@/lib/actions/user.actions";
 
 const CheckoutButton = async ({
@@ -16,11 +16,19 @@ const CheckoutButton = async ({
 
   const generateKeyString = () => {
     const date = new Date();
-    const month = date.getMonth() + 1; 
+    const month = date.getMonth() + 4; 
     const year = date.getFullYear();
     return `${user.Id}-${year}-${month}`;
   };
 
+  const order = {
+    userId: "Abebe Bikila",
+    totalAmount: "1.00",
+    chapaId: "3241342142sabcdfdd",
+    edirId: "3241342142sabcdfdd",
+    createdAt: "2023-02-02T07:53:28.000000Z",
+  };
+  await createOrder(order);
   return (
     <form method="POST" action="https://api.chapa.co/v1/hosted/pay">
       <input

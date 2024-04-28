@@ -22,9 +22,10 @@ import { IEdir } from "@/lib/database/models/edir.model";
 import { edirDefaultValues } from "@/constants";
 import { useUploadThing } from "@/lib/uploadthing";
 import { useRouter } from "next/navigation";
-import { createEdir } from "@/lib/actions/edir.actions";
+import { createEdir, updateEdir } from "@/lib/actions/edir.actions";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { revalidatePath } from "next/cache";
 
 type EdirFormProps = {
   userId: string;
@@ -34,7 +35,14 @@ type EdirFormProps = {
 };
 const EdirForm = ({ userId, type, edir, edirId }: EdirFormProps) => {
   const [files, setFiles] = useState<File[]>([]);
-  const initialValues = edir && type === "Update" ? edir : edirDefaultValues;
+  const initialValues =
+    edir && type === "Update"
+      ? {
+          ...edir,
+          price: edir.price?.toString(),
+          paymentDeadline: edir.paymentDeadline?.toString(),
+        }
+      : edirDefaultValues;
 
   const router = useRouter();
   const { startUpload } = useUploadThing("imageUploader");
@@ -67,8 +75,37 @@ const EdirForm = ({ userId, type, edir, edirId }: EdirFormProps) => {
 
         if (newEdir) {
           form.reset();
-          router.push(`/edirs/${newEdir._id}`);
-          toast.success("Edir Created Successfull")
+          router.push("/my-edirs");
+          revalidatePath("/my-edirs")
+          window.location.reload();
+          toast.success("Edir Created Successfull");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    if (type === "Update") {
+      try {
+        if (!edir || !edirId) {
+          router.back();
+          return;
+        }
+
+        const updatedEvent = await updateEdir({
+          userId,
+          edir: {
+            ...values,
+            imageUrl: uploadedImageUrl,
+            _id: edirId,
+          },
+          path: "/my-edirs",
+        });
+
+        if (updatedEvent) {
+          form.reset();
+          router.push(`/my-edirs`);
+          toast.success("Edir Updated Successfull");
         }
       } catch (error) {
         console.log(error);
