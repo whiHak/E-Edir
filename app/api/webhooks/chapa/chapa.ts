@@ -37,7 +37,7 @@ export default async function POST(req: NextApiRequest, res: NextApiResponse) {
         // This is just a placeholder switch statement
         switch (body.event) {
             case 'order.completed':
-                // Handle order completed
+                console.log("happy happy happy")
                 break;
             default:
                 console.warn('Unhandled event type:', body.event);
