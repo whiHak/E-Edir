@@ -22,7 +22,7 @@ import { IEdir } from "@/lib/database/models/edir.model";
 import { edirDefaultValues } from "@/constants";
 import { useUploadThing } from "@/lib/uploadthing";
 import { useRouter } from "next/navigation";
-import { createEdir } from "@/lib/actions/edir.action";
+import { createEdir } from "@/lib/actions/edir.actions";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 

@@ -1,7 +1,8 @@
 import AdditionalButtons from "@/components/shared/AdditionalButtons";
 import AddMember from "@/components/shared/AddMember";
 import CheckoutButton from "@/components/shared/CheckoutButton";
-import { getEdirById } from "@/lib/actions/edir.action";
+import { getEdirById } from "@/lib/actions/edir.actions";
+import { auth } from "@clerk/nextjs";
 import Image from "next/image";
 import React from "react";
 import { ToastContainer, toast } from "react-toastify";
@@ -15,6 +16,9 @@ const EdirDetails = async ({
   params: { id },
   searchParams,
 }: SearchParamProps) => {
+  const {sessionClaims } = auth();
+  const userId = sessionClaims?.userId as string;
+
   const edir = await getEdirById(id);
   return (
     <>
@@ -68,10 +72,9 @@ const EdirDetails = async ({
                 </p>
               </div>
             </div>
-            {/*Button*/}
 
             <div className="flex gap-3">
-              <CheckoutButton />
+              <CheckoutButton edir={edir} userId={userId}/>
               
               <div className="flex-center bg-green-500/10 w-max rounded-full px-5">
                 <Image
