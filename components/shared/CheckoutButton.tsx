@@ -26,7 +26,7 @@ const CheckoutButton = async ({
       <input
         type="hidden"
         name="public_key"
-        value="CHAPUBK_TEST-dD6QwcoUurYKOM7K9JqhoiZuwwVg5dwq"
+        value={process.env.NEXT_PUBLIC_TEST_KEY}
       />
       <input type="hidden" name="tx_ref" value={generateKeyString()} />
       <input type="hidden" name="amount" value={`${edir.price}`} />
