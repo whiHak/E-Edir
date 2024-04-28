@@ -1,4 +1,4 @@
-import { getEdirById } from "@/lib/actions/edir.action";
+import { getEdirById } from "@/lib/actions/edir.actions";
 import { getUserById } from "@/lib/actions/user.actions";
 import { auth } from "@clerk/nextjs";
 import Image from "next/image";
@@ -11,11 +11,11 @@ const Card = async () => {
   const userId = sessionClaims?.userId as string;
 
   const currentUser = await getUserById(userId);
-  const edir = await getEdirById(currentUser.edirId);
+  const edir = await getEdirById(currentUser?.edirId);
 
   const isLeader = userId === edir?.leader?._id?.toString();
   const isAuditor = userId === edir?.auditor?._id?.toString();
-  return currentUser.edirId ? (
+  return currentUser?.edirId ? (
     <div className="group relative flex min-h-[280px] w-full max-w-[300px] flex-col overflow-hidden rounded-xl bg-white shadow-md transition-all hover:shadow-lg md:min-h-[338px] m-5">
       <div
         style={{ backgroundImage: `url(${edir?.imageUrl})` }}

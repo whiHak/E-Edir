@@ -27,3 +27,14 @@ export type AddMemberToEdirParams = {
   edir: IEdir;
   path: string;
 };
+
+export type CheckoutOrderParams = {
+  edirTitle: string;
+  edirId: string;
+  price?: string;
+  user: {
+    _id: string;
+    firstName: string;
+    lastName: string;
+  }
+}

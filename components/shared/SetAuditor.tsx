@@ -12,7 +12,7 @@ import {
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { startTransition, useState } from "react";
-import { setAuditor } from "@/lib/actions/edir.action";
+import { setAuditor } from "@/lib/actions/edir.actions";
 import { IEdir } from "@/lib/database/models/edir.model";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
