@@ -1,32 +1,51 @@
-// pages/api/webhook.ts
-import type { NextApiRequest, NextApiResponse } from 'next';
+// app/api/webhooks/chapa/route.ts
+import { NextApiRequest, NextApiResponse } from 'next';
 import crypto from 'crypto';
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-    if (req.method === 'POST') {
-        const secret = process.env.SECRET_KEY as string;
+export default async function POST(req: NextApiRequest, res: NextApiResponse) {
+    // Retrieve your secret key from environment variables
+    const SECRET_KEY = process.env.SECRET_KEY;
 
-        try {
-            const signature = req.headers['chapa-signature'] as string;
-            const calculatedHash = crypto.createHmac('sha256', secret)
-                .update(JSON.stringify(req.body))
-                .digest('hex');
+    if (!SECRET_KEY) {
+        return res.status(500).json({ error: "SECRET_KEY is not defined in the environment variables." });
+    }
 
-            if (signature === calculatedHash) {
-                const event = req.body;
-                console.log('Webhook received and verified:', event);
+    // Get headers
+    const signature = req.headers['chapa-signature'] as string;
+    if (!signature) {
+        return res.status(400).json({ error: "No signature header provided." });
+    }
 
-                res.status(200).send('Webhook received and processed');
-            } else {
-                console.log('Invalid signature, possible tampering detected.');
-                res.status(403).send('Invalid signature');
-            }
-        } catch (error) {
-            console.error('Error processing webhook:', error);
-            res.status(500).send('Server error');
+    // Get the body as a string to ensure consistent hashing
+    const body = await req.body;
+    const bodyString = JSON.stringify(body);
+
+    // Verify the HMAC signature
+    const hash = crypto.createHmac('sha256', SECRET_KEY)
+        .update(bodyString)
+        .digest('hex');
+
+    if (signature !== hash) {
+        console.error('Invalid signature, possible tampering detected.');
+        return res.status(403).json({ error: "Invalid signature" });
+    }
+
+    // Processing the verified webhook data
+    try {
+        console.log('Webhook received and verified:', body);
+        // Here you might handle different types of events
+        // This is just a placeholder switch statement
+        switch (body.event) {
+            case 'order.completed':
+                // Handle order completed
+                break;
+            default:
+                console.warn('Unhandled event type:', body.event);
         }
-    } else {
-        res.setHeader('Allow', ['POST']);
-        res.status(405).end(`Method ${req.method} Not Allowed`);
+
+        return res.status(200).json({ message: "Webhook received and processed" });
+    } catch (error) {
+        console.error('Error processing webhook:', error);
+        return res.status(500).json({ error: "Server error" });
     }
 }
