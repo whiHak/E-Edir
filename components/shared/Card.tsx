@@ -43,10 +43,10 @@ const Card = async () => {
       <div className="flex min-h-[130px] flex-col gap-3 p-5 md:gap-4">
         <div className="flex gap-2">
           <span className="p-semibold-14 w-min rounded-full bg-green-100 px-4 py-1 text-green-60">
-            {`$${edir?.price}`}
+            {`${edir?.price}Br`}
           </span>
 
-          <div className="flex w-max rounded-full bg-grey-500/10 px-1 py-1 line-clamp-1">
+          <div className="flex w-max rounded-full bg-grey-500/10 px-1 py-1">
             <Image
               src="/assets/icons/location.svg"
               alt="location"
@@ -54,7 +54,7 @@ const Card = async () => {
               height={20}
               className=""
             />
-            <p className="p-semibold-14 text-grey-500 px-1">{edir?.location}</p>
+            <p className="p-semibold-14 text-grey-500 px-1 line-clamp-1">{edir?.location}</p>
           </div>
         </div>
 

@@ -77,15 +77,16 @@ const EdirDetails = async ({
               <CheckoutButton edir={edir} userId={userId}/>
               
               <div className="flex-center bg-green-500/10 w-max rounded-full px-5">
-                <Image
+                {/* <Image
                   src="/assets/icons/dollar.svg"
                   alt="dollar"
                   width={22}
                   height={22}
-                />
+                /> */}
                 <p className="p-bold-20 rounded-full text-green-700">
                   {`${edir?.price}`}
                 </p>
+                <p className="ml-1 p-medium-18 text-grey-500">Birr</p>
               </div>
             </div>
 
