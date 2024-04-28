@@ -3,6 +3,8 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Card from "@/components/shared/Card";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const MyEdirs = () => {
   return (
@@ -12,6 +14,7 @@ const MyEdirs = () => {
       </section>     
 
       <Card />
+      <ToastContainer />
     </>
   );
 };

@@ -20,14 +20,14 @@ const Home = async() => {
               </p>
         
               <Button size="lg" asChild className="button w-full sm:w-fit">
-                <Link href='#edirs'>Explore Edirs</Link>
+                <Link href='/my-edirs'>Explore Edirs</Link>
               </Button>
             </div>
         
             <Image 
               src="/assets/images/hero.png"
               alt="hero"
-              width={1000}
+              width={5000}
               height={1000}
               className="max-h-[70vh] object-contain object-center 2xl:max-h-[50vh]"
             />

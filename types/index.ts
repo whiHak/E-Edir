@@ -9,6 +9,7 @@ export type CreateEdirParams = {
     location: string;
     imageUrl: string;
     price: string;
+    paymentDeadline: string;
   };
 };
 
@@ -37,4 +38,28 @@ export type CheckoutOrderParams = {
     firstName: string;
     lastName: string;
   }
+}
+
+export type CreateOrderParams = {
+  chapaId: string
+  edirId: string
+  userId: string
+  totalAmount: string
+  createdAt: string
+}
+
+export type UpdateEdirParams = {
+  userId: string
+  edir: {
+    _id: string
+    title: string
+    imageUrl: string
+    description: string
+    location: string
+    price: string;
+    paymentDeadline: string;
+    leader?:string
+    auditor?:string
+  }
+  path: string
 }

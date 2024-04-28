@@ -1,5 +1,6 @@
-import { CheckoutOrderParams } from "@/types";
+import { CheckoutOrderParams, CreateOrderParams } from "@/types";
 import { connectToDatabase } from "../database";
+import Order from "../database/models/order.model";
 
 interface RequestOptionsParams {
   method: "POST";
@@ -41,3 +42,19 @@ export const checkoutOrder = async (order: CheckoutOrderParams) => {
     console.error("Error in checkoutOrder:", error);
   }
 };
+
+export const createOrder = async (order: CreateOrderParams) => {
+  try {
+      await connectToDatabase();
+    
+      const newOrder = await Order.create({
+          ...order,
+          edir: order.edirId,
+          user: order.userId
+      })
+
+      return JSON.parse(JSON.stringify(newOrder));
+  } catch (error) {
+      console.log(error);
+  }
+}
