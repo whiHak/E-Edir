@@ -1,15 +1,15 @@
 import { model, models, Schema } from "mongoose";
 
 export interface IOrder extends Document {
-  createdAt: Date;
-  chapaId: string;
-  totalAmount: string;
-  edir:string
-  user: {
-    _id: string;
-    firstName: string;
-    lastName: string;
-  };
+  // createdAt: Date;
+  // chapaId: string;
+  // totalAmount: string;
+  // edir:string
+  // user: {
+  //   _id: string;
+  //   firstName: string;
+  //   lastName: string;
+  // };
 }
 
 export type IOrderItem = {
@@ -22,26 +22,26 @@ export type IOrderItem = {
 }
 
 const orderSchema = new Schema({
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
-  chapaId: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  totalAmount: {
-    type: String,
-  },
+  // createdAt: {
+  //   type: Date,
+  //   default: Date.now,
+  // },
+  // chapaId: {
+  //   type: String,
+  //   required: true,
+  //   unique: true,
+  // },
+  // totalAmount: {
+  //   type: String,
+  // },
   edir: {
     type: String,
-    ref: "Edir",
+    required: true
   },
-  user: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
-  },
+  // user: {
+  //   type: Schema.Types.ObjectId,
+  //   ref: "User",
+  // },
 });
 
 const Order = models.Order || model("Order", orderSchema);
