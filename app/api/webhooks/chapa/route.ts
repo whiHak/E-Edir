@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request, res: Response) {
   try {
-    const body =  req;
+    const {amount} =  req.body as any;
     const order = {
       userId: "Abebe Bikila",
       totalAmount: "1.00",
@@ -14,7 +14,7 @@ export async function POST(req: Request, res: Response) {
       createdAt: "2023-02-02T07:53:28.000000Z",
     };
     const newOrder = await createOrder(order);
-    return NextResponse.json({ message: "OK", user: body });
+    return NextResponse.json({ message: "OK", user: {amount:amount} });
   } catch (error) {
     console.error("Error processing webhook:", error);
     // return res.status(500).json({ error: "Server error" });
