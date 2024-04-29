@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import crypto from "crypto";
 import { createOrder } from "@/lib/actions/order.actions";
+import { NextResponse } from "next/server";
 
 export async function POST(req: Request, res: Response) {
   // Retrieve your secret key from environment variables
@@ -40,8 +41,8 @@ export async function POST(req: Request, res: Response) {
       edirId: "3241342142sabcdfdd",
       createdAt: "2023-02-02T07:53:28.000000Z",
     };
-    await createOrder(order);
-    return new Response("", { status: 200 });
+    const newOrder = await createOrder(order);
+    return NextResponse.json({ message: "OK", user: newOrder }); 
   } catch (error) {
     console.error("Error processing webhook:", error);
     // return res.status(500).json({ error: "Server error" });
