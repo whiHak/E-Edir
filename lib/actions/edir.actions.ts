@@ -91,7 +91,7 @@ export async function updateEdir({ userId, edir, path }: UpdateEdirParams) {
 
     const edirToUpdate = await Edir.findById(edir._id);
     if (!edirToUpdate || edirToUpdate.leader.toHexString() !== userId) {
-      return "Unauthorized or event not found";
+      return { success: false, message: "Unauthorized or event not found" };
     }
 
     const updatedEdir = await Edir.findByIdAndUpdate(
@@ -101,7 +101,7 @@ export async function updateEdir({ userId, edir, path }: UpdateEdirParams) {
     );
     revalidatePath(path);
 
-    return JSON.parse(JSON.stringify(updatedEdir));
+    return { success: true, payload: JSON.parse(JSON.stringify(updatedEdir)) };
   } catch (error) {
     console.log(error);
   }
@@ -132,7 +132,7 @@ export async function deleteEdir({
     );
     if (!user) {
       console.log("User not found or update failed.");
-      return false; // Handling case where user update fails
+      return false;
     }
 
     console.log(user);
@@ -140,6 +140,6 @@ export async function deleteEdir({
     return true;
   } catch (error) {
     console.log("Error in deleteEdir:", error);
-    return false; // Ensuring a consistent return on error
+    return false;
   }
 }

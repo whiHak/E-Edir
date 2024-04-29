@@ -4,10 +4,7 @@ export interface IOrder extends Document {
   createdAt: Date;
   chapaId: string;
   totalAmount: string;
-  edir: {
-    _id: string;
-    title: string;
-  };
+  edir:string
   user: {
     _id: string;
     firstName: string;
@@ -38,7 +35,7 @@ const orderSchema = new Schema({
     type: String,
   },
   edir: {
-    type: Schema.Types.ObjectId,
+    type: String,
     ref: "Edir",
   },
   user: {

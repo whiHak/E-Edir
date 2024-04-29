@@ -102,7 +102,11 @@ const EdirForm = ({ userId, type, edir, edirId }: EdirFormProps) => {
           path: "/my-edirs",
         });
 
-        if (updatedEvent) {
+        if(!updatedEvent?.success){
+          toast.error(updatedEvent?.message);
+        }
+
+        if (updatedEvent?.success) {
           form.reset();
           router.push(`/my-edirs`);
           toast.success("Edir Updated Successfull");

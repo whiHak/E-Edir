@@ -29,16 +29,6 @@ export type AddMemberToEdirParams = {
   path: string;
 };
 
-export type CheckoutOrderParams = {
-  edirTitle: string;
-  edirId: string;
-  price?: string;
-  user: {
-    _id: string;
-    firstName: string;
-    lastName: string;
-  }
-}
 
 export type CreateOrderParams = {
   chapaId: string

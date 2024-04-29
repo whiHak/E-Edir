@@ -5,7 +5,7 @@ import { createOrder } from "@/lib/actions/order.actions";
 
 export default async function POST(req: NextApiRequest, res: NextApiResponse) {
   // Retrieve your secret key from environment variables
-  const SECRET_KEY = process.env.SECRET_KEY;
+  const SECRET_KEY = process.env.NEXT_PUBLIC_TEST_KEY;
 
   if (!SECRET_KEY) {
     return res.status(500).json({
@@ -39,13 +39,6 @@ export default async function POST(req: NextApiRequest, res: NextApiResponse) {
     console.log("Webhook received and verified:", body);
     // Here you might handle different types of events
     // This is just a placeholder switch statement
-    switch (body.event) {
-      case "order.completed":
-        break;
-      default:
-        console.warn("Unhandled event type:", body.event);
-    }
-
     const order = {
       userId: "Abebe Bikila",
       totalAmount: "1.00",
