@@ -27,7 +27,7 @@ export async function POST(req: Request, res: Response) {
   // Processing the verified webhook data
   try {
     console.log("Webhook received and verified:", body);
-    
+
     const {account_number,bank_id,bank_name,currency,amount,type,status,reference,createdAt} = body as any;
     const order = {
       accountNumber: account_number,
@@ -41,7 +41,7 @@ export async function POST(req: Request, res: Response) {
       createdAt
     };
     const newOrder = await createOrder(order);
-    return NextResponse.json({ message: "OK", user: newOrder });
+    return NextResponse.json({ message: "OK", user: body });
   } catch (error) {
     console.error("Error processing webhook:", error);
     // return res.status(500).json({ error: "Server error" });
