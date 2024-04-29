@@ -4,19 +4,6 @@ import { createOrder } from "@/lib/actions/order.actions";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request, res: Response) {
-  try {
-    // const body = JSON.parse(JSON.stringify(req.body))
-    // const {currency,amount,charge,mode,type,status,reference,createdAt} = body as any;
-    // const order = {
-    //   currency,
-    //   amount,
-    //   charge,
-    //   mode,
-    //   type,
-    //   status,
-    //   reference,
-    //   createdAt
-    // };
     const order = {
       currency: "ETB",
       amount: "1.00",
@@ -29,8 +16,4 @@ export async function POST(req: Request, res: Response) {
     };
     const newOrder = await createOrder(order);
     return NextResponse.json({ message: "OK", user: newOrder });
-  } catch (error) {
-    console.error("Error processing webhook:", error);
-    // return res.status(500).json({ error: "Server error" });
-  }
 }
