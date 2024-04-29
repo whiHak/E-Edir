@@ -7,7 +7,7 @@ const Footer = () => {
     <footer className='border-t'>
       <div className="flex-center wapper flex-between flex flex-col gap-4 p-5 text-center md:flex-row">
         <Link href="/">
-          <Image src="/assets/images/logo.svg" alt="logo" width={138} height={38}/>
+          <Image src="/assets/images/logo.png" alt="logo" width={138} height={38}/>
         </Link>
 
         <p>2024 E-Edir. All Rights Reserved.</p>
