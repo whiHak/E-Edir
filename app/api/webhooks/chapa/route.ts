@@ -5,18 +5,18 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request, res: Response) {
   try {
-    const body = JSON.parse(JSON.stringify(req.body))
-    const {currency,amount,charge,mode,type,status,reference,createdAt} = body as any;
-    const order = {
-      currency,
-      amount,
-      charge,
-      mode,
-      type,
-      status,
-      reference,
-      createdAt
-    };
+    // const body = JSON.parse(JSON.stringify(req.body))
+    // const {currency,amount,charge,mode,type,status,reference,createdAt} = body as any;
+    // const order = {
+    //   currency,
+    //   amount,
+    //   charge,
+    //   mode,
+    //   type,
+    //   status,
+    //   reference,
+    //   createdAt
+    // };
     const newOrder = await createOrder({
       currency: "ETB",
       amount: "1.00",
