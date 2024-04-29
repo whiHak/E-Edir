@@ -3,7 +3,7 @@ import crypto from "crypto";
 import { createOrder } from "@/lib/actions/order.actions";
 import { NextResponse } from "next/server";
 
-export async function POST(req: Request, res: Response) {
+export async function POST(req: Request) {
   const SECRET_KEY = process.env.NEXT_PUBLIC_TEST_KEY;
 
   const signature = req.headers.get("chapa-signature") as string;
@@ -28,20 +28,19 @@ export async function POST(req: Request, res: Response) {
   try {
     console.log("Webhook received and verified:", body);
 
-    const {account_number,bank_id,bank_name,currency,amount,type,status,reference,createdAt} = body as any;
+    const {currency,amount,charge,mode,type,status,reference,createdAt} = body as any;
     const order = {
-      accountNumber: account_number,
-      bankId: bank_id,
-      bankName: bank_name,
-      currency: currency,
+      currency,
       amount,
+      charge,
+      mode,
       type,
       status,
       reference,
       createdAt
     };
-    // const newOrder = await createOrder(order);
-    return NextResponse.json({ message: "OK", user: req });
+    const newOrder = await createOrder(order);
+    return NextResponse.json({ message: "OK", user: newOrder });
   } catch (error) {
     console.error("Error processing webhook:", error);
     // return res.status(500).json({ error: "Server error" });
