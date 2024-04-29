@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   title: "E-Edir",
   description: "Create, Join and pay with us",
   icons:{
-    icon: '/assets/images/logo.svg'
+    icon: '/assets/images/logo.png'
   }
 };
 
