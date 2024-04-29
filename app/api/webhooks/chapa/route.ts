@@ -41,8 +41,17 @@ export async function POST(req: Request) {
       reference,
       createdAt
     };
-    const newOrder = await createOrder(order);
-    return NextResponse.json({ message: "OK", user: body   });
+    const newOrder = await createOrder({
+      currency: "ETB",
+      amount: "1.00",
+      charge: "96e41186-29ba-4e30-b013-2ca36d7e7025",
+      mode: "Commercial Bank of Ethiopia (CBE)",
+      type: "Payout",
+      status: "success",
+      reference: "3241342142sabcdfdd",
+      createdAt: "2023-02-02T07:53:28.000000Z",
+    });
+    return NextResponse.json({ message: "OK", user: newOrder   });
   } catch (error) {
     console.error("Error processing webhook:", error);
     // return res.status(500).json({ error: "Server error" });
