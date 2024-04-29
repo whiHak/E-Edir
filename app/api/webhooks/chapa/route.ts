@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request, res: Response) {
   try {
-    const body =  JSON.parse(JSON.stringify(req.body));
+    const body =  JSON.stringify(req.body);
     const order = {
       userId: "Abebe Bikila",
       totalAmount: "1.00",
