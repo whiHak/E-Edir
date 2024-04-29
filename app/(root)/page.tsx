@@ -39,7 +39,7 @@ const Home = async() => {
         className="wrapper my-8 flex flex-col gap-8 md:gap-12"
       >
         <h2 className="h2-bold lg:text-3x">
-          Trust by Thousands of Edirs
+          Trusted by Thousands of Edirs
         </h2>
 
         <div className="container flex flex-col md:flex-row gap-4 items-center">

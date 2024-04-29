@@ -11,7 +11,9 @@ export async function POST(req: Request) {
     // return res.status(400).json({ error: "No signature header provided." });
   }
 
-  const body = req.body;
+
+
+  const body = JSON.parse(JSON.stringify(req.body));
   const bodyString = JSON.stringify(body);
 
   const hash = crypto
@@ -40,7 +42,7 @@ export async function POST(req: Request) {
       createdAt
     };
     const newOrder = await createOrder(order);
-    return NextResponse.json({ message: "OK", user: newOrder });
+    return NextResponse.json({ message: "OK", user: body   });
   } catch (error) {
     console.error("Error processing webhook:", error);
     // return res.status(500).json({ error: "Server error" });
