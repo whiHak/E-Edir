@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import crypto from "crypto";
 import { createOrder } from "@/lib/actions/order.actions";
 
-export default async function POST(req: Request, res: Response) {
+export async function POST(req: Request, res: Response) {
   // Retrieve your secret key from environment variables
   const SECRET_KEY = process.env.NEXT_PUBLIC_TEST_KEY;
 
