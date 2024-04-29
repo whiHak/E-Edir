@@ -65,14 +65,14 @@ const Card = async () => {
         </Link>
 
         <div className="flex-between w-full">
-          <p className="p-medium-14 md:p-medium-16 text-grey-600">
+          <p className="p-medium-14 md:p-medium-16 text-grey-600 line-clamp-1">
             {edir?.leader?.firstName} {edir?.leader?.lastName}
           </p>
 
           {isAuditor ||
             (isLeader && (
               <Link href={`/edirs/${edir?._id}/audit`} className="flex gap-2 ">
-                <p className="text-primary-500">Payment Details</p>
+                <p className="text-primary-500 text-nowrap">Payment Details</p>
                 <Image
                   src="/assets/icons/arrow.svg"
                   alt="arrow"
