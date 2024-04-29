@@ -2,6 +2,8 @@
 import { CreateOrderParams } from "@/types";
 import { connectToDatabase } from "../database";
 import Order from "../database/models/order.model";
+import { auth } from "@clerk/nextjs";
+import { getUserById } from "./user.actions";
 
 interface RequestOptionsParams {
   method: "GET";
@@ -48,11 +50,17 @@ export const checkOrder = async (tx_ref: string) => {
 };
 
 export const createOrder = async (order: CreateOrderParams) => {
+  console.log('created')
   try {
     await connectToDatabase();
 
+    const {sessionClaims} = auth();
+    const userId = sessionClaims?.userId as string;
+
+    const user = await getUserById(userId);
+
     const newOrder = await Order.create({
-      edir:"uuuuuu"
+      ...order, userId:userId, edirId: user.edirId
     });
 
     return JSON.parse(JSON.stringify(newOrder));

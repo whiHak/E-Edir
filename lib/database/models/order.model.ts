@@ -1,47 +1,47 @@
 import { model, models, Schema } from "mongoose";
 
 export interface IOrder extends Document {
-  // createdAt: Date;
-  // chapaId: string;
-  // totalAmount: string;
-  // edir:string
-  // user: {
-  //   _id: string;
-  //   firstName: string;
-  //   lastName: string;
-  // };
+  _id: string;
+  edirId: string;
+  userId: string;
+  accountNumber: string;
+  bankId: string;
+  bankName: string;
+  currency: string;
+  amount?: string;
+  type?: string;
+  status: string;
+  reference: string;
+  createdAt: string;
 }
 
 export type IOrderItem = {
-    _id: string;
-    createdAt: Date;
-    totalAmount: string;
-    edirTitle: string
-    edirId: string;
-    user: string;
-}
+  _id: string;
+  edirId: string;
+  userId:string;
+  accountNumber: string;
+  bankId: string;
+  bankName: string;
+  currency: string;
+  amount?: string;
+  type?: string;
+  status: string;
+  reference: string;
+  createdAt: string;
+};
 
 const orderSchema = new Schema({
-  // createdAt: {
-  //   type: Date,
-  //   default: Date.now,
-  // },
-  // chapaId: {
-  //   type: String,
-  //   required: true,
-  //   unique: true,
-  // },
-  // totalAmount: {
-  //   type: String,
-  // },
-  edir: {
-    type: String,
-    required: true
-  },
-  // user: {
-  //   type: Schema.Types.ObjectId,
-  //   ref: "User",
-  // },
+  userId: { type: Schema.Types.ObjectId, ref: "User" },
+  edirId: { type: Schema.Types.ObjectId, ref: "Edir" },
+  accountNumber: { type: String, require: true },
+  bankId: { type: String, require: true },
+  bankName: { type: String, require: true },
+  currency: { type: String, require: true },
+  amount: { type: String },
+  type: { type: String },
+  status: { type: String, require: true },
+  reference: { type: String, require: true },
+  createdAt: { type: String },
 });
 
 const Order = models.Order || model("Order", orderSchema);
