@@ -31,11 +31,10 @@ export type AddMemberToEdirParams = {
 
 
 export type CreateOrderParams = {
-  accountNumber: string;
-  bankId: string;
-  bankName: string;
   currency: string;
   amount?: string;
+  charge: string;
+  mode: string;
   type?: string;
   status: string;
   reference: string;

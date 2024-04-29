@@ -40,8 +40,8 @@ export async function POST(req: Request, res: Response) {
       reference,
       createdAt
     };
-    const newOrder = await createOrder(order);
-    return NextResponse.json({ message: "OK", user: body });
+    // const newOrder = await createOrder(order);
+    return NextResponse.json({ message: "OK", user: req });
   } catch (error) {
     console.error("Error processing webhook:", error);
     // return res.status(500).json({ error: "Server error" });

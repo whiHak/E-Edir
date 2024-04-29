@@ -4,11 +4,10 @@ export interface IOrder extends Document {
   _id: string;
   edirId: string;
   userId: string;
-  accountNumber: string;
-  bankId: string;
-  bankName: string;
   currency: string;
   amount?: string;
+  charge: string;
+  mode: string;
   type?: string;
   status: string;
   reference: string;
@@ -19,11 +18,10 @@ export type IOrderItem = {
   _id: string;
   edirId: string;
   userId:string;
-  accountNumber: string;
-  bankId: string;
-  bankName: string;
   currency: string;
   amount?: string;
+  charge:string;
+  mode:string;
   type?: string;
   status: string;
   reference: string;
@@ -33,11 +31,10 @@ export type IOrderItem = {
 const orderSchema = new Schema({
   userId: { type: Schema.Types.ObjectId, ref: "User" },
   edirId: { type: Schema.Types.ObjectId, ref: "Edir" },
-  accountNumber: { type: String, require: true },
-  bankId: { type: String, require: true },
-  bankName: { type: String, require: true },
   currency: { type: String, require: true },
   amount: { type: String },
+  charge: { type: String, require: true },
+  mode: { type: String, require: true },
   type: { type: String },
   status: { type: String, require: true },
   reference: { type: String, require: true },
