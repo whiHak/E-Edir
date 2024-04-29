@@ -12,7 +12,7 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: "E-Edir",
-  description: "Create, Join and pay with us",
+  description: "Create, Manage, Pay: Your Edirs, On Our Platform!",
   icons:{
     icon: '/assets/images/logo.png'
   }
