@@ -41,7 +41,7 @@ export async function POST(req: Request, res: Response) {
       createdAt: "2023-02-02T07:53:28.000000Z",
     };
     await createOrder(order);
-    // return res.status(200).json({ message: "Webhook received and processed" });
+    return new Response("", { status: 200 });
   } catch (error) {
     console.error("Error processing webhook:", error);
     // return res.status(500).json({ error: "Server error" });
