@@ -6,5 +6,6 @@ export const edirFormSchema = z.object({
     description: z.string().min(3, "Discription must be at least three characters").max(400, "Description must be less than 400 characters"),
     imageUrl: z.string(),
     price: z.string(),
-    paymentDeadline: z.string()
+    paymentDeadline: z.string(),
+    accountNumber:z.string()
 })
