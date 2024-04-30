@@ -60,7 +60,7 @@ const EdirForm = ({ userId, type, edir, edirId }: EdirFormProps) => {
       const uploadedImages = await startUpload(files);
 
       if (!uploadedImages) {
-        return;
+        return toast.error("Image not Supported!!!") ;
       }
 
       uploadedImageUrl = uploadedImages[0].url;
@@ -211,12 +211,7 @@ const EdirForm = ({ userId, type, edir, edirId }: EdirFormProps) => {
               <FormItem className="w-full">
                 <FormControl>
                   <div className="flex-center h-[54px] w-full overflow-hidden rounded-full bg-gray-50 px-4 py-2">
-                    <Image
-                      src="/assets/icons/dollar.svg"
-                      alt="dollar"
-                      width={24}
-                      height={24}
-                    />
+                  <p className="mr-1 p-medium-18 text-grey-500">Br</p>
                     <Input
                       type="number"
                       placeholder="Price"
@@ -259,6 +254,27 @@ const EdirForm = ({ userId, type, edir, edirId }: EdirFormProps) => {
             )}
           />
         </div>
+        <FormField
+            control={form.control}
+            name="accountNumber"
+            render={({ field }) => (
+              <FormItem className="w-full">
+                <FormControl>
+                  <div className="flex-center h-[54px] w-full overflow-hidden rounded-full bg-gray-50 px-4 py-2 ">
+                  <p className="mr-1 p-medium-18 text-grey-500">Ac</p>
+
+                    <Input
+                      placeholder="Account Number"
+                      {...field}
+                      className="input-field"
+                    />
+                  </div>
+                </FormControl>
+
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
         <Button
           type="submit"

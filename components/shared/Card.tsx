@@ -87,7 +87,9 @@ const Card = async () => {
   ) : (
     <div className="flex-center wrapper min-h-[200px] w-full flex-col gap-3 rounded-[14px]py-28 text-center">
       <h3 className="p-bold-20 md:h5-bold">Not in an Edir Yet?</h3>
-      <p className="p-regular-14">Create your own!!!</p>
+      <Link href="/edirs/create">
+        <p className="p-regular-14">Create your own!!!</p>
+      </Link>
     </div>
   );
 };

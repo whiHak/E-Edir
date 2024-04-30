@@ -6,6 +6,7 @@ import AddMember from "./AddMember";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import SetAuditor from "./SetAuditor";
+import Request from "./Request";
 
 const AdditionalButtons = ({ edir }: { edir: IEdir }) => {
   const { user } = useUser();
@@ -23,6 +24,7 @@ const AdditionalButtons = ({ edir }: { edir: IEdir }) => {
             <Link href={`/edirs/${edir?._id}/audit`}>Payment Details</Link>
           </Button>
         )}
+        {isLeader && <Request />}
       </div>
     </>
   );
