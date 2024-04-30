@@ -53,3 +53,10 @@ export type UpdateEdirParams = {
   }
   path: string
 }
+
+export type UpdateUserParams = {
+  firstName: string
+  lastName: string
+  username: string
+  photo: string
+}
