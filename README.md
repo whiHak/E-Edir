@@ -1,36 +1,38 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<div align="center">
+  <br />
+    <a href="https://e-edir.vercel.app/" target="_blank">
+      <img src="https://github.com/whiHak/E-Edir/blob/main/public/assets/images/logo.png" alt="Project Banner">
+    </a>
+  <br />
 
-## Getting Started
+  <div>
+    <img src="https://img.shields.io/badge/-Next_JS_14-black?style=for-the-badge&logoColor=white&logo=nextdotjs&color=000000" alt="Next.js" />
+    <img src="https://img.shields.io/badge/-TypeScript-black?style=for-the-badge&logoColor=white&logo=typescript&color=3178C6" alt="TypeScript" />
+  </div>
 
-First, run the development server:
+  <h3 align="center">A Full Stack Next 14 Edir Management App</h3>
+</div>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## <a name="tech-stack">⚙️ Tech Stack</a>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Node.js
+- Next.js
+- TypeScript
+- TailwindCSS
+- Chapa
+- Zod
+- React Hook Form
+- Shadcn
+- uploadthing
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## <a name="features">🔋 Features</a>
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+👉 **Authentication (CRUD) with Clerk:** User management through Clerk, ensuring secure and efficient authentication.
 
-## Learn More
+👉 **Edirs (CRUD):** Comprehensive functionality for creating, reading, updating, and deleting edirs, giving users full control over edir management.
+- **Create Edirs:** Users can effortlessly generate new edirs, providing essential details such as title, date, location, and any additional information.
+- **Read Edirs:** Seamless access to a detailed view of all edirs, allowing users to explore edir specifics, including descriptions, schedules, and related information.
+- **Update Edirs:** Empowering users to modify edir details dynamically, ensuring that event information remains accurate and up-to-date.
+- **Delete Edirs:** A straightforward process for removing edirs from the system, giving administrators the ability to manage and curate the platform effectively.
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+👉 **Checkout and Pay with Chapa:** Smooth and secure payment transactions using Chapa, enhancing user experience during the checkout process.
