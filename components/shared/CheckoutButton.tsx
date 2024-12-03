@@ -53,7 +53,7 @@ const CheckoutButton = ({ edir, userId }: { edir: IEdir; userId: string }) => {
       <input type="hidden" name="callback_url" value={"https://e-edir.vercel.app/api/webhooks/chapa"} />
       <input type="hidden" name="return_url" value={`${process.env.NEXT_PUBLIC_CHAPA_RETURN_URL}/${edir._id}`} />
       <Button type="submit" size="default" className="button sm:w-fit">
-        Pay Monthly fee
+        Pay 
       </Button>
     </form>
   );
