@@ -211,9 +211,9 @@ const EdirForm = ({ userId, type, edir, edirId }: EdirFormProps) => {
               <FormItem className="w-full">
                 <FormControl>
                   <div className="flex-center h-[54px] w-full overflow-hidden rounded-full bg-gray-50 px-4 py-2">
-                  <p className="mr-1 p-medium-18 text-grey-500">Br</p>
+                    <p className="mr-1 p-medium-18 text-grey-500">Br</p>
                     <Input
-                      type="number"
+                      type="text"
                       placeholder="Price"
                       {...field}
                       className="p-regular-16 border-0 bg-gray-50 outline-offset-0 focus:border-0 focus-visible:ring-0 focus:visible:ring-offset-0"
